@@ -6,7 +6,7 @@ tags: [home network, tailscale, opnsense]
 ---
 
 ## Overview
-This project addresses a known issue where Tailscale static routes are lost on OPNsense following configuration changes to you tailnet. To ensure continuous network connectivity within your tailnet, I've developed a workaround that monitors the accessibility of a specified IP address within the tailnet. If the ping to this IP fails, indicating a potential loss of Tailscale static routes, the Tailscale service is automatically restarted to restore connectivity.
+This project addresses a known issue where Tailscale static routes are lost on OPNsense following configuration changes to your tailnet. To ensure continuous network connectivity within your tailnet, I've developed a workaround that monitors the accessibility of a specified IP address within the tailnet. If the ping to this IP fails, indicating a potential loss of Tailscale static routes, the Tailscale service is automatically restarted to restore connectivity.
 
 ## Security Disclaimer
 > Security is paramount, especially when modifications involve your firewall. I strongly advise against blindly trusting external sources, including this repository. Before implementing any changes, thoroughly review and understand the code. Your network's security and integrity depend on due diligence.
@@ -34,7 +34,7 @@ cp /var/tailscaleTools/config/actions_tailcheck.conf /usr/local/opnsense/service
 service configd restart
 ```
 
-5. Open the opensense GUI and navigate to **System>Settings>Cron**.
+5. Open the OPNsense GUI and navigate to **System>Settings>Cron**.
    - Create a new cron job like the one below (mine is set to run every 15 minutes, adjust as needed).
    - CHANGE THE PARAMETER FIELD TO A TAILNET IP THAT IS ALWAYS ONLINE IN YOUR TAILNET.
    - Click **Save**

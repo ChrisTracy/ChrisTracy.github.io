@@ -1,5 +1,5 @@
 ---
-title: Using Github Actions to deploy your Caddyfile
+title: Using GitHub Actions to deploy your Caddyfile
 date: 2024-07-18 23:00:00 -0500
 categories: [Home Network, Caddy]
 tags: [home network, caddy, github actions]
@@ -41,7 +41,7 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
         volumes:
         - /path/on/host/caddy_data:/data
         - /path/on/host/caddy_config:/config
-        - /path/on/host/caddy_caddyFile:/etc/caddy # take note of this host location. You will need to define it in Github Actions.
+        - /path/on/host/caddy_caddyFile:/etc/caddy # take note of this host location. You will need to define it in GitHub Actions.
     ```
 2. Run `docker compose up -d` to start your container.
 
@@ -56,7 +56,7 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
 
 ### 3. Set Up a Self-hosted Runner
 
-> The account you use for github actions must have permission to write to the caddy_file volume on the machine. It also needs permission to restart the caddy docker container. I reccomend creating a new account for the github actions service and adding this to the /etc/sudoers file (where git is the name of your account): git ALL=(ALL) NOPASSWD: /bin/cp, /usr/bin/docker restart *
+> The account you use for GitHub actions must have permission to write to the caddy_file volume on the machine. It also needs permission to restart the caddy docker container. I recommend creating a new account for the github actions service and adding this to the /etc/sudoers file (where git is the name of your account): git ALL=(ALL) NOPASSWD: /bin/cp, /usr/bin/docker restart *
 {: .prompt-danger }
 
 1. Go to your repository on GitHub.
@@ -68,7 +68,7 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
 
 1. In your repository, create a directory named `.github/workflows/`
 2. Inside `.github/workflows/`, create a file named `deploy-public-caddyfile.yml`
-3. Add the following content to the `deploy-public-caddyfile.yml `file and commit the changes:
+3. Add the following content to the `deploy-public-caddyfile.yml` file and commit the changes:
     > Change the run-on and run commands to match what you defined in the previous steps.
     {: .prompt-warning }
 
