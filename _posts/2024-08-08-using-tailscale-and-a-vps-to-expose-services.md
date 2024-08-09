@@ -1,5 +1,5 @@
-recommend---
-title: Using Tailscale and a VPS to securely expose services on your network 
+---
+title: Using Tailscale, Caddy, and a VPS to securely expose services on your network 
 date: 2024-08-08 23:00:00 -0500
 categories: [Home Network, Caddy, Tailscale]
 tags: [home network, caddy, github actions]
@@ -111,13 +111,12 @@ At this point you can add servers in different locations and make this vps a sin
 
     ```json
 	"acls": [
-		//Allow VPS to self-hosted server on port 80
 		{
 			"action": "accept",
 			"src":    ["100.85.190.5"],
 			"dst":    ["100.85.190.10:80"],
 		},
-	],
+	]
     ```
 
 * Check out my guide on [Using GitHub Actions to deploy your Caddyfile](https://christracy.com/posts/using-github-actions-to-deploy-caddyfile/). This allows you to retain version control along with automated deployments of your Caddyfile.
