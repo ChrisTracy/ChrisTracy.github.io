@@ -21,11 +21,6 @@ This guide explains how to use a VPS, Tailscale, and Caddy to expose your servic
 > I strongly recommend reading up on how to protect your VPS. Rackspace has good documentation about [linux security best practices](https://github.com/rackerlabs/rackspace-how-to/blob/master/content/cloud-servers/linux-server-security-best-practices.md). At the very least you should disable root login and password authentication.
 {: .prompt-warning }
 
-## Requirements
-1. **Tailscale**: Install tailscale on the VPS and your self hosted machine.
-2. **DNS**: Create an A record pointing to the public ip of your VPS.
-3. **Caddy**: Create a Caddy container on the VPS server.
-
 ## Steps
 
 ### Install Tailscale
@@ -55,7 +50,7 @@ At this point you should have 2 devices in your tailnet, the VPS and your self h
 ### Set Up a Caddy server
 1. Install Docker and Docker Compose if you haven't already. Refer to the [Docker website](https://docs.docker.com/engine/install/) for installation on your seleted OS.
 
-2. Create a Caddyfile on your VPS. Change the path to wherever you want this file to be on your host. Take note of this path as you will need to add it to your docker compose file in step 3.
+2. Create a Caddyfile on your VPS. Change the path to wherever you want this file to be on your host. Take note of this path as you will need to add it to your docker compose file in step 4.
     ```bash
     nano /path/on/host/caddy_caddyFile/Caddyfile
     ```
