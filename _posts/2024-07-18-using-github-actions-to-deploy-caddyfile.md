@@ -56,7 +56,7 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
 
 ### 3. Set Up a Self-hosted Runner
 
-> The account you use for GitHub actions must have permission to write to the caddy_file volume on the machine. It also needs permission to restart the caddy docker container. I recommend creating a new account for the github actions service and adding this to the /etc/sudoers file (where git is the name of your account): git ALL=(ALL) NOPASSWD: /bin/cp, /usr/bin/docker restart *
+> The account you use for GitHub actions must have permission to write to the caddy_file volume on the machine. It also needs permission to run exec on the caddy docker container. I recommend creating a new account for the github actions service and adding this to the /etc/sudoers file (where git is the name of your account): git ALL=(ALL) NOPASSWD: /bin/cp, /usr/bin/docker exec *
 {: .prompt-danger }
 
 1. Go to your repository on GitHub.
@@ -94,9 +94,10 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
             sudo cp ./caddy/public/Caddyfile /path/on/host/caddy_caddyFile/Caddyfile
         shell: bash
 
-        - name: Restart Docker container
+        - name: Gracefully Reload Caddy
         run: |
-            sudo docker restart caddy_public
+          caddy_container_id=$(docker ps | grep caddy | awk '{print $1;}')
+          docker exec -w /etc/caddy $caddy_container_id caddy reload
         shell: bash
 
     ```
