@@ -73,32 +73,32 @@ This guide explains how to set up and deploy a Caddyfile using GitHub Actions wi
     {: .prompt-warning }
 
     ```yaml
-    name: Deploy Public Caddyfile
+    name: Deploy Caddyfile
 
     on:
-    push:
+      push:
         branches:
-        - main
+          - main  # Adjust this to your branch setup
         paths:
-        - 'caddy/public/Caddyfile'
-
+          - 'caddy/t1-public/Caddyfile'  # Trigger only when Caddyfile is changed
+    
     jobs:
-    deploy:
-        runs-on: [self-hosted, t1-public]  # Use the label for your specific runner that you defined in step 3
+      deploy:
+        runs-on: [self-hosted, t1-public]  # Use the label for your specific runner
         steps:
         - name: Checkout code
-        uses: actions/checkout@v2
-
+          uses: actions/checkout@v2
+    
         - name: Copy Caddyfile to Docker volume
-        run: | # Replace /path/on/host/caddy_caddyFile with the host path in your docker-compose.yml file defined in step 1
-            sudo cp ./caddy/public/Caddyfile /path/on/host/caddy_caddyFile/Caddyfile
-        shell: bash
-
+          run: |
+            sudo cp ./caddy/t1-public/Caddyfile /var/lib/docker/volumes/caddy_caddyFile/_data/Caddyfile
+          shell: bash
+    
         - name: Gracefully Reload Caddy
-        run: |
-          caddy_container_id=$(docker ps | grep caddy | awk '{print $1;}')
-          docker exec -w /etc/caddy $caddy_container_id caddy reload
-        shell: bash
+          run: |
+            caddy_container_id=$(docker ps | grep caddy | awk '{print $1;}')
+            docker exec -w /etc/caddy $caddy_container_id caddy reload
+          shell: bash
 
     ```
 
